@@ -18,7 +18,7 @@ import java.util.Date;
 @TableName(value = "supplier")
 public class Supplier implements Serializable {
     /*主键*/
-    @TableField(value = "id")
+    //@TableField(value = "id")
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 

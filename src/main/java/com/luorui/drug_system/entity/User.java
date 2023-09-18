@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @TableName(value = "user")
 public class User implements Serializable {
-    @TableField(value = "id")
+    //@TableField(value = "id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String username;

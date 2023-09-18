@@ -22,10 +22,10 @@ public class ShiroFilterConfiguration {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager());
-        /**
-         * Shiro内置过滤器，实现权限相关的拦截器
-         * anon:无需登录，可以访问
-         * authc:必须登录才可以访问
+        /*
+          Shiro内置过滤器，实现权限相关的拦截器
+          anon:无需登录，可以访问
+          authc:必须登录才可以访问
          */
         Map<String,String> filterMap = new LinkedHashMap<>();
         filterMap.put("/static/**","anon");

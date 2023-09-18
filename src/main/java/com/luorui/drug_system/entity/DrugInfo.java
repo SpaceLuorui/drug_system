@@ -17,10 +17,10 @@ import java.util.Date;
  * 药品信息
  */
 @Data
-@TableName(value = "druginfo")
+@TableName(value = "druginfo.sql")
 public class DrugInfo implements Serializable {
     /*主键*/
-    @TableField(value = "id")
+    //@TableField(value = "id")
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
     /*药品名称*/

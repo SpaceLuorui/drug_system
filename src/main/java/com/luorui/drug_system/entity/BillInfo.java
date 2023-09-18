@@ -21,7 +21,7 @@ import java.util.Date;
 @TableName(value = "billinfo")
 public class BillInfo implements Serializable {
     /*主键*/
-    @TableField(value = "id")
+    //@TableField(value = "id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     /*供应商名称*/

@@ -17,10 +17,10 @@ import java.util.Date;
  * 销售记录
  */
 @Data
-@TableName(value = "saleinfo")
+@TableName(value = "saleinfo.sql")
 public class SaleInfo implements Serializable {
     /*主键*/
-    @TableField(value = "id")
+    //@TableField(value = "id")
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 

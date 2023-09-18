@@ -20,7 +20,7 @@ import java.util.Date;
 @TableName(value = "returngoods")
 public class ReturnGoods implements Serializable {
     /*主键*/
-    @TableField(value = "id")
+    //@TableField(value = "id")
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
     /*药品名称*/

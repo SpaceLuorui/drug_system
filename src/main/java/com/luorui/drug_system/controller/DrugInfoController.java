@@ -34,9 +34,9 @@ public class DrugInfoController {
     //@RequestParam可以通过@RequestParam(defaultValue = “0”)指定参数默认值
     @RequestMapping(value = "druginfoQueryPage")
     @ResponseBody
-    public Object drugInfoQueryPage(String param, @RequestParam(defaultValue = "1")int pageNum, @RequestParam(defaultValue = "10")int pageSize){
+    public Object drugInfoQueryPage(String param, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "10")int limit){
         try {
-            IPage<DrugInfo> iPage = drugInfoService.selectDrugInfoPage(pageNum,pageSize,param);
+            IPage<DrugInfo> iPage = drugInfoService.selectDrugInfoPage(page,limit,param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);
         }catch (Exception exception){
             return ResultMapUtil.getHashMapException(exception);

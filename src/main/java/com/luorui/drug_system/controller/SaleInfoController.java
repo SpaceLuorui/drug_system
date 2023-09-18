@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 /**
  * @author 罗锐
  * @date 2023/5/6
@@ -28,9 +30,9 @@ public class SaleInfoController {
     //分页查询
     @RequestMapping(value = "/saleinfoQueryPage")
     @ResponseBody
-    public Object saleInfoQueryPage(String param, @RequestParam(defaultValue = "1")int pageNum, @RequestParam(defaultValue = "10")int pageSize){
+    public Object saleInfoQueryPage(String param, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "10")int limit){
         try {
-            IPage<SaleInfo> iPage = saleInfoService.querySaleInfoPage(pageNum,pageSize,param);
+            IPage<SaleInfo> iPage = saleInfoService.querySaleInfoPage(page,limit,param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);
         }catch (Exception exception){
             return ResultMapUtil.getHashMapException(exception);
@@ -46,6 +48,7 @@ public class SaleInfoController {
     @ResponseBody
     public Object saleInfoAdd(SaleInfo saleInfo){
         try {
+            saleInfo.setOperatetime(new Date());
             int i = saleInfoService.addSaleInfo(saleInfo);
             return ResultMapUtil.getHashMapSave(i);
         }catch (Exception exception){

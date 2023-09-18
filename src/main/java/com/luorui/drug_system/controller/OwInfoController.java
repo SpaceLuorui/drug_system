@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 /**
  * @author 罗锐
  * @date 2023/5/6
@@ -30,9 +32,9 @@ public class OwInfoController {
     //分页查询
     @RequestMapping(value = "/owinfoQueryPage")
     @ResponseBody
-    public Object owInfoQueryPage(String param, @RequestParam(defaultValue = "1")int pageNum, @RequestParam(defaultValue = "10")int pageSize){
+    public Object owInfoQueryPage(String param, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "10")int limit){
         try {
-            IPage<OwInfo> iPage = owInfoService.queryOwInfoPage(pageNum,pageSize,param);
+            IPage<OwInfo> iPage = owInfoService.queryOwInfoPage(page,limit,param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);
         }catch (Exception exception){
             return ResultMapUtil.getHashMapException(exception);
@@ -49,6 +51,7 @@ public class OwInfoController {
     @ResponseBody
     public Object owInfoAdd(OwInfo owInfo){
         try {
+            owInfo.setCreatetime(new Date());
             int i = owInfoService.addOwInfo(owInfo);
             return ResultMapUtil.getHashMapSave(i);
         }catch (Exception exception){

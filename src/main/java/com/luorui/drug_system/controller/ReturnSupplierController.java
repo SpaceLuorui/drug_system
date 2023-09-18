@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 /**
  * @author 罗锐
  * @date 2023/5/5
@@ -32,9 +34,9 @@ public class ReturnSupplierController {
      */
     @RequestMapping(value = "/returnsupplierQueryPage")
     @ResponseBody
-    public Object returnSupplierQueryPage(String param, @RequestParam(defaultValue = "1")int pageNum, @RequestParam(defaultValue = "10")int pageSize){
+    public Object returnSupplierQueryPage(String param, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "10")int limit){
         try {
-            IPage<ReturnSupplier> iPage = returnSupplierService.selectReturnSupplierPage(pageNum,pageSize,param);
+            IPage<ReturnSupplier> iPage = returnSupplierService.selectReturnSupplierPage(page,limit,param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);
         }catch (Exception exception){
             return ResultMapUtil.getHashMapException(exception);
@@ -54,6 +56,7 @@ public class ReturnSupplierController {
     @ResponseBody
     public Object returnSupplierAdd(ReturnSupplier returnSupplier){
         try{
+            returnSupplier.setCreatetime(new Date());
             int i = returnSupplierService.addReturnSupplier(returnSupplier);
             return ResultMapUtil.getHashMapSave(i);
         }catch (Exception exception){

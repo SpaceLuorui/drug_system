@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 /**
  * @author 罗锐
  * @date 2023/5/6
@@ -29,9 +30,9 @@ public class ProblemController {
     //分页查询
     @RequestMapping(value = "/problemQueryPage")
     @ResponseBody
-    public Object queryProblemPage(String param, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
+    public Object queryProblemPage(String param, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
         try {
-            IPage<Problem> iPage = problemService.queryProblemPage(pageNum, pageSize, param);
+            IPage<Problem> iPage = problemService.queryProblemPage(page, limit, param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);
         } catch (Exception exception) {
             return ResultMapUtil.getHashMapException(exception);
@@ -49,6 +50,7 @@ public class ProblemController {
     @ResponseBody
     public Object problemAdd(Problem problem) {
         try {
+            problem.setCreatetime(new Date());
             int i = problemService.addProblem(problem);
             return ResultMapUtil.getHashMapSave(i);
         } catch (Exception exception) {

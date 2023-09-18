@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 /**
  * @author 罗锐
  * @date 2023/5/5
@@ -33,15 +35,15 @@ public class BillInfoController {
     /**
      * 分页查询账单信息列表
      * @param param 参数
-     * @param pageNum 第几页
-     * @param pageSize 每页数据量
+     * @param page 第几页
+     * @param limit 每页数据量
      * @return 返回结果
      */
     @RequestMapping(value = "billinfoQueryPage")
     @ResponseBody
-    public Object billInfoQueryPage(String param, @RequestParam(defaultValue = "1")int pageNum, @RequestParam(defaultValue = "10")int pageSize){
+    public Object billInfoQueryPage(String param, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "10")int limit){
         try{
-            IPage<BillInfo> iPage = billInfoService.selectBillInfoPage(pageNum,pageSize,param);
+            IPage<BillInfo> iPage = billInfoService.selectBillInfoPage(page,limit,param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);
         }catch (Exception exception){
             return ResultMapUtil.getHashMapException(exception);
@@ -66,6 +68,7 @@ public class BillInfoController {
     @ResponseBody
     public Object billInfoAdd(BillInfo billInfo){
         try {
+            billInfo.setBuytime(new Date());
             int i = billInfoService.addBillInfo(billInfo);
             return ResultMapUtil.getHashMapSave(i);
         }catch (Exception exception){

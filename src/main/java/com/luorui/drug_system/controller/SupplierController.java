@@ -35,15 +35,15 @@ public class SupplierController {
     /**
      * 分页查询供应商列表
      * @param param 供应商参数
-     * @param pageNum 第几页
-     * @param pageSize 每页数据量
+     * @param page 第几页
+     * @param limit 每页数据量
      * @return 返回结果
      */
     @RequestMapping(value = "/supplierQueryPage")
     @ResponseBody
-    public Object supplierQueryPage(String param, @RequestParam(defaultValue = "1")int pageNum, @RequestParam(defaultValue = "10")int pageSize){
+    public Object supplierQueryPage(String param, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "10")int limit){
         try{
-            IPage<Supplier> iPage = supplierService.selectSupplierPage(pageNum,pageSize,param);
+            IPage<Supplier> iPage = supplierService.selectSupplierPage(page,limit,param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);
         }catch (Exception exception){
             return ResultMapUtil.getHashMapException(exception);
